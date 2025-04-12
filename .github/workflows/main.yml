@@ -21,10 +21,10 @@ jobs:
         uses: NuGet/setup-nuget@v1
 
       - name: Restore packages
-        run: nuget restore YourPlugin.sln
+        run: nuget restore AnythingButton_Results.sln
 
       - name: Build .gha plugin
-        run: msbuild YourPlugin.csproj /p:Configuration=Release
+        run: msbuild AnythingButton_Results.csproj /p:Configuration=Release
 
       - name: Upload .gha file
         uses: actions/upload-artifact@v4
