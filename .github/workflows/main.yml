@@ -27,7 +27,7 @@ jobs:
         run: msbuild YourPlugin.csproj /p:Configuration=Release
 
       - name: Upload .gha file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: plugin-gha
-          path: path\to\YourPlugin\bin\Release\YourPlugin.gha
+          path: AnythingButton_Results/bin/Release/AnythingButton_Results.gha
