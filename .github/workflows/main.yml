@@ -1,22 +1,3 @@
-Skip to content
-Navigation Menu
-juanriopizzella
-AnythingButton
-
-Type / to search
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-Build C# Project
-update #42
-Jobs
-Run details
-Workflow file for this run
-.github/workflows/compile.yml at 3f26fc3
 name: Build C# Project
 
 on:
@@ -55,4 +36,3 @@ jobs:
         with:
           name: compiled-app
           path: out/
-update · juanriopizzella/AnythingButton@3f26fc3 
