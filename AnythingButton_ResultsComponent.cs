@@ -96,3 +96,41 @@ namespace AnythingButton_Results
             get { return new Guid("d3b3c5e1-5c3b-4f8b-9f3b-2f3b5e1c3b5e"); }
         }
     }
+
+    public class DrawLineComponent : GH_Component
+    {
+        public DrawLineComponent()
+          : base("Draw Line", "Line",
+              "Draws a line between two points",
+              "AnythingButton", "AnythingButton")
+        {
+        }
+
+        protected override void RegisterInputParams(GH_InputParamManager pManager)
+        {
+            pManager.AddPointParameter("Point A", "A", "Start point of the line", GH_ParamAccess.item);
+            pManager.AddPointParameter("Point B", "B", "End point of the line", GH_ParamAccess.item);
+        }
+
+        protected override void RegisterOutputParams(GH_OutputParamManager pManager)
+        {
+            pManager.AddLineParameter("Line", "L", "Resulting line", GH_ParamAccess.item);
+        }
+
+        protected override void SolveInstance(IGH_DataAccess DA)
+        {
+            Point3d pointA = Point3d.Unset;
+            Point3d pointB = Point3d.Unset;
+
+            if (!DA.GetData(0, ref pointA)) return;
+            if (!DA.GetData(1, ref pointB)) return;
+
+            Line line = new Line(pointA, pointB);
+            DA.SetData(0, line);
+        }
+
+        public override Guid ComponentGuid
+        {
+            get { return new Guid("f3b3c5e1-5c3b-4f8b-9f3b-2f3b5e1c3b5d"); }
+        }
+    }
