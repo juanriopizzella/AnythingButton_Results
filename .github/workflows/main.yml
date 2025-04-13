@@ -1,42 +1,41 @@
 name: Build Grasshopper Plugin
  
- on:
-   push:
-     branches: [main]
-   pull_request:
-     branches: [main]
- 
- jobs:
-   build:
-     runs-on: windows-latest
- 
-     steps:
-       - name: Checkout repository
-         uses: actions/checkout@v3
- 
-       - name: Setup MSBuild
-         uses: microsoft/setup-msbuild@v1
- 
-       - name: Cache NuGet packages
-         uses: actions/cache@v3
-         with:
-           path: ~/.nuget/packages
-           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
-           restore-keys: |
-             nuget-${{ runner.os }}-
-       
-       - name: Setup NuGet
-         uses: NuGet/setup-nuget@v1
- 
-       - name: Restore packages
-         run: nuget restore AnythingButton_Results.sln
- 
-       - name: Build .gha plugin
-         run: msbuild AnythingButton_Results.csproj /p:Configuration=Release
- 
-       - name: Upload .gha file
-         uses: actions/upload-artifact@v4
-         with:
-           name: plugin-gha
-           path: AnythingButton_Results/bin/Release/AnythingButton_Results.gha
-           path: D:\a\AnythingButton_Results\AnythingButton_Results\bin\Release\net48\AnythingButton_Results.gha
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            nuget-${{ runner.os }}-
+      
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
+      - name: Restore packages
+        run: nuget restore AnythingButton_Results.sln
+
+      - name: Build .gha plugin
+        run: msbuild AnythingButton_Results.csproj /p:Configuration=Release
+
+      - name: Upload .gha file
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-gha
+          path: D:\a\AnythingButton_Results\AnythingButton_Results\bin\Release\net48\AnythingButton_Results.gha
