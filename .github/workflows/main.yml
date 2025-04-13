@@ -1,41 +1,38 @@
-name: Build Grasshopper Plugin
- 
+name: Build C# Project
+
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
-
-      - name: Cache NuGet packages
-        uses: actions/cache@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
         with:
-          path: ~/.nuget/packages
-          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            nuget-${{ runner.os }}-
-      
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1
+          dotnet-version: '7.0.x'
 
-      - name: Restore packages
-        run: nuget restore AnythingButton_Results.sln
+      - name: Restore dependencies
+        run: dotnet restore
 
-      - name: Build .gha plugin
-        run: msbuild AnythingButton_Results.csproj /p:Configuration=Release
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
 
-      - name: Upload .gha file
+      - name: Run tests (optional)
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Publish application
+        run: dotnet publish -c Release -f net7.0-windows -o out
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: plugin-gha
-          path: D:\a\AnythingButton_Results\AnythingButton_Results\bin\Release\net48\AnythingButton_Results.gha
+          name: compiled-app
+          path: out/
