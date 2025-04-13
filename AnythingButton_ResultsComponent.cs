@@ -57,9 +57,8 @@ namespace AnythingButton_Results
         {
             get { return new Guid("e3b3c5e1-5c3b-4f8b-9f3b-2f3b5e1c3b5f"); }
         }
-    }
-    {
-        public CreateCircleComponent()
+    }    
+    public class CreateCircleComponent : GH_Component
           : base("Create Circle", "Circle",
               "Creates a circle given a center point and radius",
               "Category", "Subcategory")
