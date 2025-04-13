@@ -59,6 +59,8 @@ namespace AnythingButton_Results
         }
     }    
     public class CreateCircleComponent : GH_Component
+    {
+        public CreateCircleComponent()
           : base("Create Circle", "Circle",
               "Creates a circle given a center point and radius",
               "Category", "Subcategory")
